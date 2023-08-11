@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('includes/title.ejs') %>
+        <title>Cart Page</title>
+</head>
+
+<body>
+    <div class="sticky-top">
+        <div class="w3-hover-border-blue-gray" style="background-color: black">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-sm-2" style="vertical-align:middle; text-align:center">
+                        <img style="width:200px; height:80px" src="/picture/logo2.png" />
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto;">
+                        <a style="font-family: 'Kablammo';" class="navigationtext" href="/home"> Home</a>
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto">
+                        <div class="dropdown">
+                            <a style="font-family: 'Kablammo';" class="navigationtext button_dropdown" href="/product">Product</a>
+                            <div class="content_dropdown">
+                                <a style="text-decoration: none;" href="/short">SHORT</a>
+                                <a style="text-decoration: none;" href="/tshirt">T-SHIRT</a>
+                                <a style="text-decoration: none;" href="/pants">PANTS</a>
+                                <a style="text-decoration: none;" href="/hoodie">HOODIE</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto">
+                        <a style="font-family: 'Kablammo';" class="navigationtext" href="/about">About</a>
+                    </div>
+
+                    <% if (user !=null) { %>
+                        <div class="col-sm-2" style="text-align: center; margin:auto">
+                                
+                            
+                            <a class="userlogin">
+                                <b><%= user %></b>
+                            </a>
+                            <div class="dropdown">
+                                <button class="navigationtext button_dropdown" style="background-color: black;">
+                                    <img width="30px" height="30px" src="<%=id.avt%>">
+                                </button>
+                                <div class="content_dropdown">
+                                    <a class="navlogout" href="/logout">Log Out</a>
+                                    <a class="navlogout" href="/profile">Profile</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <% } else { %>
+                            <div class="col-sm-1" style="text-align: center; margin:auto">
+                                <a class="fas fa-sign-in-alt"
+                                    style="color: aliceblue; padding-right: 10px; vertical-align:sub; font-size: 0.7cm;"></a>
+                                <a class="navlogin" href="/login">Login</a>
+                            </div>
+                            <div class="col-sm-1" style="text-align: center; margin:auto">
+                                <a class="navlogin" href="/register">Register</a>
+                            </div>
+                            <% } %>
+
+                                <div class="col-sm-1" style="text-align: center; margin:auto">
+                                    <a class="navlogin fa fa-cart-plus" style="font-size: 30px;" href="/cart"></a>
+                                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <h1 class="home-h1">Cart</h1>
+    <div class="usercart" style="font-family: 'Gloock';">Welcome <%=user%></div>
+    <% if (user !=null) { %>
+        <div>
+            <h3 style="margin-left: 80px; display: inline; color:darkblue;">Address: <%= id.address%>
+            </h3>
+            <input style="font-size: x-large; color: black; border: 0px solid rebeccapurple;" required />
+        </div>
+        <%} %>
+
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered border-primary " style=" width: 80%; margin-left: 80px;">
+
+                    <thead class="table-light">
+                        <tr class="th1" style="border-bottom: 2px solid black;">
+                            <th style="text-align: center;">Item</th>
+                            <th style="text-align: center;">Price</th>
+                            <th style="text-align: center;">Quantity</th>
+                            <th style="text-align: center;">Subtotal</th>
+                            <th style="text-align: center;">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align: center;">
+                        <% if (CartProduct.length !=0) { var i=0; CartProduct.forEach(function(CartProduct){ i +=1 ; {
+                            %>
+                            <tr style="border-bottom: 1px solid black;">
+                                <td><img style="width: 70%; height: 200px;" src="<%=CartProduct.Link_product%>" /></td>
+                                <td id='OrPrice<%=i%>'>
+                                    <%=CartProduct.Price_product%>
+                                </td>
+                                <td>
+                                    <input type="number" id=<%=i%> name="Quantity" value="1" min="1" max="100"
+                                    onchange="QuantityChange(<%=i%>)"/>
+                                </td>
+                                <!-- Subtotal -->
+                                <td id='t<%=i%>'>
+                                    <%=CartProduct.Price_product%>
+                                </td>
+                                <!-- Subtotal -->
+                                <td>
+                                    <a style="text-decoration: none; color: red;"
+                                        href="/del/<%= CartProduct.ID_product %>"><b>Delete</b></a>
+                                </td>
+                            </tr>
+
+                            <% }}); } %>
+                                <tr>
+                                    <td>
+                                        Total:
+                                    </td>
+                                    <td id="total"></td>
+                                </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <% if (user !=null) { %>
+            <div class="container">
+                <div class="row">
+                    <fieldset>
+                        <h3>PAYMENT:</h3>
+                        <div>
+                            <input type="radio" id="huey" name="drone" value="huey" checked>
+                            <a href="#">COD</a>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="dewey" name="drone" value="dewey">
+                            <a href="/momo">Momo</a>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="louie" name="drone" value="louie">
+                            <a href="/visa_checkout">Cards</a>
+                        </div>
+                    </fieldset>
+                    
+                    <div class="col-sm-6" style="text-align: right;">
+                        <form method="get" action="/Checkout">
+                            <input class="btn btn-primary" type="submit" value="Check Out" name="CheckOut"
+                                onclick="CheckOutBtn()">
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+            <%} else { %>
+                <h3 style="text-align: center; color:red;">LOG IN TO PAY YOUR BILL.</h3>
+                <h3 style="text-align: center; color:red;">Please.</h3>
+            <%} %>
+
+</body>
+
+<script>
+    function checkSelected() {
+        var data = document.getElementById("brand").value;
+        document.getElementById("show").innerHTML = data;
+    }
+
+    function QuantityChange(i) {
+        var productPriceOriginal = document.getElementById('OrPrice' + i).textContent;
+        var productPriceOriginalParse = parseInt(productPriceOriginal);
+        var Quantity = document.getElementById(i).value;
+        var QuantityParse = parseInt(Quantity);
+        document.getElementById("t" + i).innerText = QuantityParse * productPriceOriginalParse;
+    }
+
+    function tinhtien() {
+        var total = 0;
+        var price = 0;
+        var i = 1;
+        for (i = 1; i < 10; i++) {
+            if (document.getElementById('t' + i) != null) {
+                price = document.getElementById('t' + i).textContent;
+                total += parseInt(price);
+            }
+            else {
+                break;
+            }
+        }
+        document.getElementById("total").innerText = total;
+    }
+
+    setInterval(tinhtien, 10);
+
+    function CheckOutBtn() {
+        alert("Thanks for your checking out. Have a good day!");
+    }
+</script>
+<footer>
+    <div class="container-fluid">
+        <div class="row">
+            <div style="background-color:lightgray; padding: 20px 0; margin:30px 0">
+                <span class="fa fa-phone" style="color: black; font-size:large; margin-left: 30px;"></span>
+                <span>Customer Service:</span>
+                <span><strong>093.8660.288</strong></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <h4><strong>Our stores:</strong></h4>
+                <p><strong style="cursor: pointer;">Store 1:</strong> 136 Tran Hung Dao street, Ward 3, District
+                    3, Ho Chi Minh city</p>
+                <p><strong style="cursor: pointer;">Store 2:</strong> 234 Su Van Hanh street, Ward 3, District
+                    10, Ho Chi Minh city</p>
+                <p><strong style="cursor: pointer;">Store 3:</strong> 567 Le Van Sy street, Ward 3, District 3,
+                    Ho Chi Minh city</p>
+
+            </div>
+            <div class="col-sm-2" style="font-size: 2em; text-align:center">
+                <h4><strong>Contact us</strong></h4>
+                <a href="https://www.facebook.com" style="cursor: pointer;" class="fa fa-facebook-official"></a>
+                <a href="https://www.instagram.com" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+                -webkit-background-clip: text;
+                       
+                        background-clip: text;
+                -webkit-text-fill-color: transparent;
+                
+                font-size: 30px;" aria-hidden="true" class="fa fa-instagram"></a>
+                <a href="https://youtube.com" style="cursor: pointer; color: red;" class="fa fa-youtube"></a>
+            </div>
+
+            <div class="col-sm-5">
+                <div>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1006548.1604370301!2d105.19855391297432!3d9.780553512602301!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f7ea14b92c3%3A0x44f3320b6f7af47f!2zMTM2IFRy4bqnbiBoxrBuZyDEkOG6oW8gLSBwaMaw4budbmcgUGjhuqFtIE5nxakgbMOjbw!5e0!3m2!1svi!2s!4v1679977858318!5m2!1svi!2s"
+                        width="100%" height="200px" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</html>

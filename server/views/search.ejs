@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search</title>
+    <%- include('includes/title.ejs') %>
+</head>
+
+</html>
+
+<body>
+    <div class="sticky-top">
+        <div class="w3-hover-border-blue-gray" style="background-color: black">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-2" style="vertical-align:middle; text-align:center">
+                        <img style="width:200px; height:80px" src="/picture/logo2.png" />
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto;">
+                        <a style="font-family: 'Kablammo';" class="navigationtext" href="/home"> Home</a>
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto">
+                        <div class="dropdown">
+                            <a style="font-family: 'Kablammo';" class="navigationtext button_dropdown" href="/product">Product</a>
+                            <div class="content_dropdown">
+                                <a style="text-decoration: none;" href="/short">SHORT</a>
+                                <a style="text-decoration: none;" href="/tshirt">T-SHIRT</a>
+                                <a style="text-decoration: none;" href="/pants">PANTS</a>
+                                <a style="text-decoration: none;" href="/hoodie">HOODIE</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto">
+                        <a style="font-family: 'Kablammo';" class="navigationtext" href="/about">About</a>
+                    </div>
+
+                    <% if (user !=null) { %>
+                        <div class="col-sm-2" style="text-align: center; margin:auto">
+                                
+                            
+                            <a class="userlogin">
+                                <b><%= user %></b>
+                            </a>
+                            <div class="dropdown">
+                                <button class="navigationtext button_dropdown" style="background-color: black;">
+                                    <img width="30px" height="30px" src="<%=id.avt%>">
+                                </button>
+                                <div class="content_dropdown">
+                                    <a class="navlogout" href="/logout">Log Out</a>
+                                    <a class="navlogout" href="/profile">Profile</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <% } else { %>
+                            <div class="col-sm-1" style="text-align: center; margin:auto">
+                                <a class="fas fa-sign-in-alt"
+                                    style="color: aliceblue; padding-right: 10px; vertical-align:sub; font-size: 0.7cm;"></a>
+                                <a class="navlogin" href="/login">Login</a>
+                            </div>
+                            <div class="col-sm-1" style="text-align: center; margin:auto">
+                                <a class="navlogin" href="/register">Register</a>
+                            </div>
+                            <% } %>
+
+                                <div class="col-sm-1" style="text-align: center; margin:auto">
+                                    <a class="navlogin fa fa-cart-plus" style="font-size: 30px;" href="/cart"></a>
+                                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <!-- Content -->
+        <div class="row input-group">
+            <div class="form-outline" style="margin: 10px;">
+                <form method="post" action="search">
+                    <input style="width: 300px; border-bottom: 2px solid #110f29; font-family:Arial, Helvetica, sans-serif"
+                        type="text" id="search" class="form-control" name="search"
+                        placeholder="Search what you need here" />
+                    <input class="btn btn-primary"
+                        style="border-radius: 0px; background-color: #110f29; font-family:Arial, Helvetica, sans-serif"
+                        type="submit" value="SEARCH" />
+                </form>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <% if (result.length !=0) {result.forEach(function(result){ { %>
+                    <div class="col-md-3" style="margin-bottom: 20px;">
+                        <div class="img" style="padding: 10px 0px;">
+                            <img style="height: 300px; width: 100%;" src="<%=result.Link_product%>" />
+                        </div>
+                        <div style="display: none;">
+                            <%=result.Category%>
+                        </div>
+                        <div class="title" style="display: none;">
+                            <%=result.ID_product%>
+                        </div>
+                        <div style="text-transform: uppercase;">
+                            <b>
+                                <%=result.Name_product%>
+                            </b>
+                        </div>
+                        <div class="price"><b>Price: <%=result.Price_product%> VNĐ</b></div>
+                        <p style="margin: 10px 0px;"><b>Size:</b>
+                            <span style="border: 4px solid black; padding: 5px; cursor: pointer;"><b>S</b></span>
+                            <span style="border: 4px solid black; padding: 5px; cursor: pointer;"><b>M</b></span>
+                            <span style="border: 4px solid black; padding: 5px; cursor: pointer;"><b>L</b></span>
+                        </p>
+                        <ul style="display: flex; padding: 0px; margin-bottom: 5px;"><b>Color:</b>
+                            <li style="margin: 0px 5px; background: <%=result.Color%>;" class="squareColor">
+                            </li>
+                        </ul>
+                        <form style="display: inline-block;" method="post" action="/product/<%=result.ID_product%>">
+                            <input class="btn btn-dark btn-sm" type="submit" value="Add to cart">
+                        </form>
+                        <form style="display: inline-block;" method="get" action="/details/<%=result.ID_product%>">
+                            <input class="btn btn-dark btn-sm" type="submit" value="Detail">
+                        </form>
+                    </div>
+                    <% }}); } %>
+            </div>
+            <ul class="listPage">
+
+            </ul>
+        </div>
+    </div>
+</body>

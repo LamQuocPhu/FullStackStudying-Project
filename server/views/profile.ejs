@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('includes/title.ejs') %>
+        <%- include('includes/react_lib.ejs') %>
+            <title>Profile Page</title>
+            <style>
+                #bold {
+                    font-weight: bold;
+                }
+            </style>
+</head>
+
+<body>
+
+    <div class="sticky-top">
+        <div class="w3-hover-border-blue-gray" style="background-color: black">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-sm-2" style="vertical-align:middle; text-align:center">
+                        <img style="width:200px; height:80px" src="/picture/logo2.png" />
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto;">
+                        <a style="font-family: 'Kablammo';" class="navigationtext" href="/home"> Home</a>
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto">
+                        <div class="dropdown">
+                            <a style="font-family: 'Kablammo';" class="navigationtext button_dropdown" href="/product">Product</a>
+                            <div class="content_dropdown">
+                                <a style="text-decoration: none;" href="/short">SHORT</a>
+                                <a style="text-decoration: none;" href="/tshirt">T-SHIRT</a>
+                                <a style="text-decoration: none;" href="/pants">PANTS</a>
+                                <a style="text-decoration: none;" href="/hoodie">HOODIE</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto">
+                        <a style="font-family: 'Kablammo';" class="navigationtext" href="/about">About</a>
+                    </div>
+
+                    <% if (user !=null) { %>
+                        <div class="col-sm-2" style="text-align: center; margin:auto">
+                                
+                            
+                            <a class="userlogin">
+                                <b><%= user %></b>
+                            </a>
+                            <div class="dropdown">
+                                <button class="navigationtext button_dropdown" style="background-color: black;">
+                                    <img width="30px" height="30px" src="<%=id.avt%>">
+                                </button>
+                                <div class="content_dropdown">
+                                    <a class="navlogout" href="/logout">Log Out</a>
+                                    <a class="navlogout" href="/profile">Profile</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <% } else { %>
+                            <div class="col-sm-1" style="text-align: center; margin:auto">
+                                <a class="fas fa-sign-in-alt"
+                                    style="color: aliceblue; padding-right: 10px; vertical-align:sub; font-size: 0.7cm;"></a>
+                                <a class="navlogin" href="/login">Login</a>
+                            </div>
+                            <div class="col-sm-1" style="text-align: center; margin:auto">
+                                <a class="navlogin" href="/register">Register</a>
+                            </div>
+                            <% } %>
+
+                                <div class="col-sm-1" style="text-align: center; margin:auto">
+                                    <a class="navlogin fa fa-cart-plus" style="font-size: 30px;" href="/cart"></a>
+                                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- page contet -->
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <div>
+            <h1 style="text-align: center;">PROFILE</h1>
+            <img style="margin-left: 20%;" src="<%=id.avt%>">
+            <table class="table table-hover table-bordered">
+                <tr>
+                    <td id="bold">Name: </td>
+                    <td style="text-transform: uppercase;">
+                        <%=id.student_name%>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="bold">Phone Number: </td>
+                    <td>
+                        <%=id.phone%>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="bold">Email: </td>
+                    <td>
+                        <%=id.email%>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="bold">Address: </td>
+                    <td>
+                        <%=id.address%>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+
+    </div>
+    <div style="text-align: center; vertical-align: middle;">
+        <a class="fa fa-cart-plus" style="color: red; font-size: 40px;"></a>
+        <a style="border: 5px dotted black; color: black; padding: 5px;" href="/cart"><b>Your Orders</b></a>
+        
+    </div>
+    
+</body>
+
+</html>

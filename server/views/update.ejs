@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<%- include('includes/title.ejs') %>
+    <head>
+        <title>Update Page</title>
+    </head>
+
+    <body style="background-color:lightblue;">
+        <h2 style="text-align: center;">UPDATE INFORMATION</h2>
+        <div style="text-align: center;">
+            <img src="<%=avt%>">
+        </div>
+        <div class="container" style="display:flex;justify-content:center;align-items: center;">
+            <form method="post" action="update_successful">
+                <div class="table-responsive">
+                    <table class="table table-hover " style="width: fit-content;">
+                        <tr style="background-color: #343a40;">
+                            <td style="color: white;">Name</td>
+                            <td>
+                                <input style="border: 0px;" type="text" name="username" value=<%=student_name %> >
+                            </td>
+                        </tr>
+                        <tr style="background-color: #1089ff;">
+                            <td>Phone Number</td>
+                            <td>
+                                <input style="border: 0px;" type="text" name="phone" value=<%=phone %> >
+                            </td>
+                        </tr>
+                        <tr style="background-color: #28a745;">
+                            <td>Role</td>
+                            <td>
+                                <input style="border: 0px;" name="role" type="text" value=<%=role %> >
+                            </td>
+                        </tr>
+
+                        <tr style="background-color: #ffc107;">
+                            <td>Email</td>
+                            <td>
+                                <input style="border: 0px;" readonly name="email" type="text" value=<%=email %> >
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="text-align: center;">
+                    <input style="text-align: center; background-color: black;" class="btn btn-primary" type="submit"
+                        value="Confirm">
+                </div>
+            </form>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('includes/title.ejs') %>
+</head>
+
+<body>
+    <div class="sticky-top">
+        <div class="w3-hover-border-blue-gray" style="background-color: black">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-sm-2" style="vertical-align:middle; text-align:center">
+                        <img style="width:200px; height:80px" src="/picture/logo2.png" />
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto;">
+                        <a style="font-family: 'Kablammo';" class="navigationtext" href="/home"> Home</a>
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto">
+                        <div class="dropdown">
+                            <a style="font-family: 'Kablammo';" class="navigationtext button_dropdown" href="/product">Product</a>
+                            <div class="content_dropdown">
+                                <a style="text-decoration: none;" href="/short">SHORT</a>
+                                <a style="text-decoration: none;" href="/tshirt">T-SHIRT</a>
+                                <a style="text-decoration: none;" href="/pants">PANTS</a>
+                                <a style="text-decoration: none;" href="/hoodie">HOODIE</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto">
+                        <a style="font-family: 'Kablammo';" class="navigationtext" href="/about">About</a>
+                    </div>
+
+                    <% if (user !=null) { %>
+                        <div class="col-sm-2" style="text-align: center; margin:auto">
+                                
+                            
+                            <a class="userlogin">
+                                <b><%= user %></b>
+                            </a>
+                            <div class="dropdown">
+                                <button class="navigationtext button_dropdown fa fa-ellipsis-v" aria-hidden="true" style="background-color: black; padding: 5px;">
+                                    
+                                </button>
+                                <div class="content_dropdown">
+                                    <a class="navlogout" href="/logout">Log Out</a>
+                                    <a class="navlogout" href="/profile">Profile</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <% } else { %>
+                            <div class="col-sm-1" style="text-align: center; margin:auto">
+                                <a class="fas fa-sign-in-alt"
+                                    style="color: aliceblue; padding-right: 10px; vertical-align:sub; font-size: 0.7cm;"></a>
+                                <a class="navlogin" href="/login">Login</a>
+                            </div>
+                            <div class="col-sm-1" style="text-align: center; margin:auto">
+                                <a class="navlogin" href="/register">Register</a>
+                            </div>
+                            <% } %>
+
+                                <div class="col-sm-1" style="text-align: center; margin:auto">
+                                    <a class="navlogin fa fa-cart-plus" style="font-size: 30px;" href="/cart"></a>
+                                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <h1 style="margin-left: 10px;">Member Page</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <p style="font-size: x-large; color:brown; margin-left: 10px;"><b style="font-family: 'Gloock';">Welcome <%=user%></b></p>
+                <a style="text-decoration: none; color: black; border: 3px solid;margin-left: 10px;" href="/register">
+                    <b>Add member</b>
+                </a>
+            </div>
+
+        </div>
+        <div class="row input-group">
+            <div class="form-outline" style="margin: 10px;">
+                <form method="post" action="searchMember">
+                    <input style="width: 300px; border-bottom: 2px solid #110f29; font-family:Arial, Helvetica, sans-serif;"
+                        type="search" id="form1" class="form-control" name="search"
+                        placeholder="Search what you need here" />
+                    <input class="btn btn-primary"
+                        style="border-radius: 0px; background-color: #110f29; font-family:Arial, Helvetica, sans-serif"
+                        type="submit" value="SEARCH" />
+                </form>
+            </div>
+        </div>
+        <br>
+        <form method="post" action="update_successful">
+            <% if(studentlist.length !=0) { %>
+                <div class="row">
+                    <div class="col table-responsive" style="overflow-x: auto;">
+                        <table id="table1" class="table table-hover table-bordered">
+                            <caption style="text-align: center; color: black;"><b>Table 1</b></caption>
+                            <thead>
+                                <tr style="text-align: center;">
+                                    <th style="text-align: center;">No.</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th style="text-align: center;">Role</th>
+                                    <th>Address</th>
+                                    <% if(rolename=='admin' ){ %>
+                                        <th style="text-align: center;">Delete</th>
+                                        <th style="text-align: center;">Update</th>
+                                        <% } %>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if(studentlist.length !=0){studentlist.forEach(function(data){ { %>
+                                    <tr id="<%=data.name%>">
+                                        <td style="text-align: center;">
+                                            <%=data.student_id%>
+                                        </td>
+                                        <td style="text-align: left;">
+                                            <%=data.student_name%>
+                                        </td>
+                                        <td>
+                                            <%=data.email%>
+                                        </td>
+                                        <td>
+                                            <%=data.phone%>
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <%=data.role%>
+                                        </td>
+                                        <td>
+                                            <%=data.address%>
+                                        </td>
+                                        <% if(rolename=='admin' ){ %>
+                                            <td style="text-align: center;">
+                                                <!-- <%= data.email %> -->
+                                                <a style="text-decoration: none; color: red;"
+                                                    href="/delete/<%= data.email %>"><b>Delete</b></a>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <a style="text-decoration: none; color:blue;"
+                                                    href="/update/<%= data.email %>"><b>Update</b></a>
+                                            </td>
+                                            <% } %>
+                                    </tr>
+
+                                    <%} }); } %>
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+                <% }  %>
+                    
+    </div>
+</body>
+<footer>
+    <div class="container-fluid">
+        <div class="row">
+            <div style="background-color:lightgray; padding: 20px 0; margin:30px 0">
+                <span class="fa fa-phone" style="color: black; font-size:large; margin-left: 30px;"></span>
+                <span>Customer Service:</span>
+                <span><strong>093.8660.288</strong></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <h4><strong>Our stores:</strong></h4>
+                <p><strong style="cursor: pointer;">Store 1:</strong> 136 Tran Hung Dao street, Ward 3, District
+                    3, Ho Chi Minh city</p>
+                <p><strong style="cursor: pointer;">Store 2:</strong> 234 Su Van Hanh street, Ward 3, District
+                    10, Ho Chi Minh city</p>
+                <p><strong style="cursor: pointer;">Store 3:</strong> 567 Le Van Sy street, Ward 3, District 3,
+                    Ho Chi Minh city</p>
+
+            </div>
+            <div class="col-sm-2" style="font-size: 2em; text-align:center">
+                <h4><strong>Contact us</strong></h4>
+                <a href="https://www.facebook.com" style="cursor: pointer;" class="fa fa-facebook-official"></a>
+                <a href="https://www.instagram.com" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+                -webkit-background-clip: text;
+                       
+                        background-clip: text;
+                -webkit-text-fill-color: transparent;
+                
+                font-size: 30px;" aria-hidden="true" class="fa fa-instagram"></a>
+                <a href="https://youtube.com" style="cursor: pointer; color: red;" class="fa fa-youtube"></a>
+            </div>
+
+            <div class="col-sm-5">
+                <div>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1006548.1604370301!2d105.19855391297432!3d9.780553512602301!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f7ea14b92c3%3A0x44f3320b6f7af47f!2zMTM2IFRy4bqnbiBoxrBuZyDEkOG6oW8gLSBwaMaw4budbmcgUGjhuqFtIE5nxakgbMOjbw!5e0!3m2!1svi!2s!4v1679977858318!5m2!1svi!2s"
+                        width="100%" height="200px" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</html>

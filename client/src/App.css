@@ -1,0 +1,32 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.addMember {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.addMember input {
+  width: 300px;
+  height: 20px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.addMember button {
+  width: 100px;
+  height: 50px;
+  margin-top: 10px;
+  background-color: gray;
+  font-weight: bolder;
+}
+
+.addMember button:hover {
+  background-color: red;
+}

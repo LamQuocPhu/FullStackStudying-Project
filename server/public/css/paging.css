@@ -1,0 +1,38 @@
+.container{
+    width: 100%;
+}
+
+.list{
+    grid-template-columns: 25% 25% 25% 25%;
+    display: grid;    
+}
+
+/* .image{
+    width: 100px;
+} */
+
+.homeimg img{
+    width: 300px;
+    padding: 10px;
+}
+
+
+.listPage{
+    padding: 10px;
+    text-align: center;
+    list-style: none;
+}
+
+.listPage li{
+    background-color: white;
+    padding: 20px;
+    display: inline-block;
+    cursor: pointer;
+    
+}
+
+.listPage .active{
+    background-color: lightgray;
+    color: black;
+    font-size: 20px;
+}

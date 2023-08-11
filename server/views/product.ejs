@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('includes/title.ejs') %>
+        <title>Wardrobe Products</title>
+</head>
+
+<body>
+    <div class="sticky-top">
+        <div class="w3-hover-border-blue-gray" style="background-color: black">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-sm-2" style="vertical-align:middle; text-align:center">
+                        <img style="width:200px; height:80px" src="/picture/logo2.png" />
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto;">
+                        <a style="font-family: 'Kablammo';" class="navigationtext" href="/home"> Home</a>
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto">
+                        <div class="dropdown">
+                            <a style="font-family: 'Kablammo';" class="navigationtext button_dropdown" href="/product">Product</a>
+                            <div class="content_dropdown">
+                                <a style="text-decoration: none;" href="/short">SHORT</a>
+                                <a style="text-decoration: none;" href="/tshirt">T-SHIRT</a>
+                                <a style="text-decoration: none;" href="/pants">PANTS</a>
+                                <a style="text-decoration: none;" href="/hoodie">HOODIE</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2" style="text-align: center; margin:auto">
+                        <a style="font-family: 'Kablammo';" class="navigationtext" href="/about">About</a>
+                    </div>
+
+                    <% if (user !=null) { %>
+                        <div class="col-sm-2" style="text-align: center; margin:auto">
+                            <a class="userlogin">
+                                <b><%= user %></b>
+                            </a>
+                            <div class="dropdown">
+                                <button class="navigationtext button_dropdown" style="background-color: black;">
+                                    <img width="30px" height="30px" src="<%=id.avt%>">
+                                </button>
+                                <div class="content_dropdown">
+                                    <a class="navlogout" href="/logout">Log Out</a>
+                                    <a class="navlogout" href="/profile">Profile</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <% } else { %>
+                            <div class="col-sm-1" style="text-align: center; margin:auto">
+                                <a class="fas fa-sign-in-alt"
+                                    style="color: aliceblue; padding-right: 10px; vertical-align:sub; font-size: 0.7cm;"></a>
+                                <a class="navlogin" href="/login">Login</a>
+                            </div>
+                            <div class="col-sm-1" style="text-align: center; margin:auto">
+                                <a class="navlogin" href="/register">Register</a>
+                            </div>
+                            <% } %>
+                                <div class="col-sm-1" style="text-align: center; margin:auto">
+                                    <a class="navlogin fa fa-cart-plus" style="font-size: 30px;" href="/cart"></a>
+                                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row input-group">
+        <div class="form-outline" style="margin: 10px;">
+            <form method="post" action="search">
+                <input style="width: 300px; border-bottom: 2px solid #110f29; font-family:Arial, Helvetica, sans-serif"
+                    type="text" id="search" class="form-control" name="search"
+                    placeholder="Search what you need here" />
+                <input class="btn btn-primary"
+                    style="border-radius: 0px; background-color: #110f29; font-family:Arial, Helvetica, sans-serif"
+                    type="submit" value="SEARCH" />
+            </form>
+        </div>
+    </div>
+
+    <h2 class="home-h1">Products</h2>
+
+    <div class="container">
+        <div class="row">
+            <% if (product.length !=0) { product.forEach(function(ProductInfo){ { %>
+                <div class="col-md-3" style="margin-bottom: 20px;">
+                    <div>
+                        <img style="height: 300px; width: 100%;" src="<%=ProductInfo.Link_product%>" />
+                    </div>
+
+                    <div style="display: none;">
+                        <%=ProductInfo.ID_product%>
+                    </div>
+                    <div style="text-transform: uppercase;">
+                        <b>
+                            <%=ProductInfo.Name_product%>
+                        </b>
+                    </div>
+                    <div>
+                        <b>Price: <%=ProductInfo.Price_product%>đ</b>
+                    </div>
+                    <div style="display: none;">Quantity: <%=ProductInfo.Quantity_product%></div>
+                    <p style="margin: 10px 0px;"><b>Size:</b>
+                        <span style="border: 4px solid black; padding: 5px; cursor: pointer;"><b>S</b></span>
+                        <span style="border: 4px solid black; padding: 5px; cursor: pointer;"><b>M</b></span>
+                        <span style="border: 4px solid black; padding: 5px; cursor: pointer;"><b>L</b></span>
+                    </p>
+                    <ul style="display: flex; padding: 0px; margin-bottom: 5px;"><b>Color:</b>
+                        <li style="margin: 0px 5px; background: <%=ProductInfo.Color%>;" class="squareColor">
+                        </li>
+                    </ul>
+
+                    <form style="display: inline-block;" method="post" action="/product/<%=ProductInfo.ID_product%>">
+                        <input class="btn btn-dark btn-sm" type="submit" value="Add to Cart">
+                    </form>
+                    <form style="display: inline-block;" method="get" action="/details/<%=ProductInfo.ID_product%>">
+                        <input class="btn btn-dark btn-sm" type="submit" value="Detail" />
+                    </form>
+                </div>
+
+                <% }}); } %>
+        </div>
+    </div>
+
+    <!-- footer -->
+
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div style="background-color:lightgray; padding: 20px 0; margin:30px 0">
+                    <span class="fa fa-phone" style="color: black; font-size:large; margin-left: 30px;"></span>
+                    <span>Customer Service:</span>
+                    <span><strong>093.8660.288</strong></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <h4><strong>Our stores:</strong></h4>
+                    <p><strong style="cursor: pointer;">Store 1:</strong> 136 Tran Hung Dao street, Ward 3, District
+                        3, Ho Chi Minh city</p>
+                    <p><strong style="cursor: pointer;">Store 2:</strong> 234 Su Van Hanh street, Ward 3, District
+                        10, Ho Chi Minh city</p>
+                    <p><strong style="cursor: pointer;">Store 3:</strong> 567 Le Van Sy street, Ward 3, District 3,
+                        Ho Chi Minh city</p>
+
+                </div>
+                <div class="col-sm-2" style="font-size: 2em; text-align:center">
+                    <h4><strong>Contact us</strong></h4>
+                    <a href="https://www.facebook.com" style="cursor: pointer;" class="fa fa-facebook-official"></a>
+                    <a href="https://www.instagram.com" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+                    -webkit-background-clip: text;
+                           
+                            background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    
+                    font-size: 30px;" aria-hidden="true" class="fa fa-instagram"></a>
+                    <a href="https://youtube.com" style="cursor: pointer; color: red;" class="fa fa-youtube"></a>
+                </div>
+
+                <div class="col-sm-5">
+                    <div>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1006548.1604370301!2d105.19855391297432!3d9.780553512602301!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f7ea14b92c3%3A0x44f3320b6f7af47f!2zMTM2IFRy4bqnbiBoxrBuZyDEkOG6oW8gLSBwaMaw4budbmcgUGjhuqFtIE5nxakgbMOjbw!5e0!3m2!1svi!2s!4v1679977858318!5m2!1svi!2s"
+                            width="100%" height="200px" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

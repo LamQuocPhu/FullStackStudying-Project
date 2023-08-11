@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cart Page</title>
+    </head>
+    <body>
+        <h1 class="h0">Cart</h1>
+        <img style="width: 100%; height: 500px; " src="~/picture/logo.png" />
+        <br>
+
+    <!-- <img style="width: 100px; height: 100px; position:absolute; left: 50%" src="~/picture/cart.png" /> -->
+    <br>
+
+        <form>
+
+        <div class="container">
+                <div class="col-sm-4">
+                <img style="width: 100px; height: 100px" src="~/picture/t-shirt/s1.jpg" />
+                 
+                </div>
+
+            <div style="color: red" class="col-sm-4">
+                  18.99
+                </div>
+            <div class="col-sm-4">
+                <select id="brand" onchange="checkSelected()">
+                    <option value="1">
+                        1
+                    </option>
+
+                    <option value="2">
+                        2
+                    </option>
+
+                    <option value="3">
+                        3
+                    </option>
+                </select>
+                <p id="show"></p>
+                </div>
+        </div>
+
+        <div class="container">
+            <div class="col-sm-4">
+                <img style="width: 100px; height: 100px" src="~/picture/jeans/j1.jpg" />
+
+            </div>
+
+            <div style="color: red" class="col-sm-4">
+                18.99
+            </div>
+            <div  class="col-sm-4">
+                <select id="brand" onchange="checkSelected()">
+                    <option value="1">
+                        1
+                    </option>
+
+                    <option value="2">
+                        2
+                    </option>
+
+                    <option value="3">
+                        3
+                    </option>
+                </select>
+                <p id="show"></p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-sm-4">
+                <img style="width: 100px; height: 100px" src="~/picture/rings/r3.jpg" />
+
+            </div>
+
+            <div style="color: red" class="col-sm-4">
+                18.99
+            </div>
+            <div class="col-sm-4">
+                <select id="brand" onchange="checkSelected()">
+                    <option value="1">
+                        1
+                    </option>
+
+                    <option value="2">
+                        2
+                    </option>
+
+                    <option value="3">
+                        3
+                    </option>
+                </select>
+                <p id="show"></p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-sm-4">
+                <img style="width: 100px; height: 100px" src="~/picture/sneaker/sp3.jpg" />
+
+            </div>
+
+            <div style="color: red" class="col-sm-4">
+                18.99
+            </div>
+            <div  class="col-sm-4">
+                <select id="brand" onchange="checkSelected()">
+                    <option value="1">
+                        1
+                    </option>
+
+                    <option value="2">
+                        2
+                    </option>
+
+                    <option value="3">
+                        3
+                    </option>
+                </select>
+                <p id="show"></p>
+            </div>
+        </div>
+
+        </form>
+    </body>
+    <script>
+        function checkSelected() {
+            var data = document.getElementById("brand").value;
+            document.getElementById("show").innerHTML = data;
+        }
+    </script>
+</html>
+
+
+
+

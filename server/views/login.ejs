@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<%- include('includes/loginCss.ejs') %>
+
+    <head>
+        <title>Login Page</title>
+    </head>
+
+    <body>
+        <div class="col-sm-2" style="padding: 10px; background-color: black; font-size: 30px; text-align: right;">
+            <a style="text-decoration: none; color: gray;" class="navigationtext fa fa-home" href="/home">HOME</a>
+        </div>
+
+        <section style="background-color: black;">
+            <div class="img-bg">
+                <img src="/picture/logo2.png" alt="Logo Wardrobe">
+            </div>
+            <div class="noi-dung">
+                <% if(user==null){ %>
+                    <div class="form">
+                        <h2>LOG IN PAGE</h2>
+                        <form method="post" action="home">
+                            <table>
+                                <tr class="input-form">
+                                    <td style="color: white;">USERNAME: </td>
+                                    <td><input type="text" id="username" name="username" placeholder="Username" required
+                                            minlength="3" maxlength="10"></td>
+                                    <td style="color: red; font-family: Corbel; font-weight: bolder">
+                                        <div id="usernamecheck"></div>
+                                    </td>
+                                </tr>
+
+                                <tr class="input-form">
+                                    <td style="color: white;">PASSWORD: </td>
+                                    <td><input type="password" id="password" name="password" placeholder="Password"
+                                            required minlength="3" maxlength="10"></td>
+                                    <td style="color: red; font-family: Corbel;">
+                                        <div id="passwordcheck"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="input-form">
+                                <input type="submit" value="Login" />
+                            </div>
+
+                        </form>
+
+                        <div class="input-form">
+                            <form method="get" action="/register">
+                                <input type="submit" value="Register" />
+                            </form>
+                        </div>
+
+                        <div class="input-form">
+                            <form method="get" action="/resetpassword">
+                                <input type="submit" value="Forgot password" />
+                            </form>
+                        </div>
+                        <!-- <div class="input-form">
+                            <form method="get" action="/home">
+                                <input type="submit" value="Back to Homepage" />
+                            </form>
+                        </div> -->
+                    </div>
+                    <% } %>
+            </div>
+        </section>
+    </body>
+
+    <script>
+        setInterval(function check() {
+            var name = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            if (name == "") {
+                document.getElementById("usernamecheck").innerHTML = ""
+            }
+            else {
+                document.getElementById("usernamecheck").innerHTML = ""
+            }
+
+            if (password == "") {
+                document.getElementById("passwordcheck").innerHTML = ""
+            }
+            else {
+                document.getElementById("passwordcheck").innerHTML = ""
+            }
+        }, 2000);
+
+
+    </script>
+
+</html>
