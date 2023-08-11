@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+
+@{
+    ViewData["Title"] = "Home";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+
+
+</head>
+<body>
+
+    <h1>HOME</h1>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3" style="background-color: lightgreen">
+                <img width="100%" height="200px" src="~/picture/jeans/j1.jpg" />
+                <a class="sp_home_page" asp-area="" asp-controller="Home" asp-action="Product">Jeans</a>
+            </div>
+
+            <div class="col-sm-3" style="background-color: lightblue">
+                <img width="100%" height="200px" src="~/picture/rings/r1.jpg" />
+                <a class="sp_home_page" asp-area="" asp-controller="Home" asp-action="Product">Ring</a>
+            </div>
+
+            <div class="col-sm-3" style="background-color: lightpink">
+                <img width="100%" height="200px" src="~/picture/sneaker/sp1.jpg" />
+                <a class="sp_home_page" asp-area="" asp-controller="Home" asp-action="Product">Sneaker</a>
+            </div>
+
+            <div class="col-sm-3" style="background-color: lightsalmon">
+                <img width="100%" height="200px" src="~/picture/t-shirt/s1.jpg" />
+                <a class="sp_home_page" asp-area="" asp-controller="Home" asp-action="Product">T-shirt</a>
+            </div>
+        </div>
+    </div>
+    <h1>Which you will immediately fall in love</h1>
+
+    <form>
+        <div class="slideshow-container">
+            <div class="mySlides">
+                <div class="numbertext">1 / 4</div>
+                <img src="~/picture/jeans/j1.jpg" style="width:100%; height: 600px" />
+                <div class="text">Jeans Best seller</div>
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">2 / 4</div>
+                <img src="~/picture/rings/r2.jpg" style="width:100%; height: 600px" />
+                <div class="text">Ring Best seller</div>
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">3 / 4</div>
+                <img src="~/picture/sneaker/sp3.jpg" style="width:100%; height: 600px" />
+                <div class="text">Sneaker Best seller</div>
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">4 / 4</div>
+                <img src="~/picture/T-shirt/s4.jpg" style="width:100%; height: 600px" />
+                <div class="text">T-shirt Best seller</div>
+            </div>
+
+        </div>
+
+
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </form>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 3000);
+        }
+    </script>
+
+</body>
+
+
+</html>
+

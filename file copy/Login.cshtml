@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Page</title>
+        <link rel="stylesheet" href="~/css/demo.css" />
+        <style>
+        .login {
+            text-shadow: 3px 2px rgb(240, 4, 149);
+            font-weight: bold;
+            font-family: monospace;
+            text-align: center;
+            color: rgb(225, 249, 7);
+            position: absolute;
+            margin-top: 325px;
+            margin-left: 750px;
+        }
+        </style>
+    </head>
+    <h1 style="position: center">LogIn Here</h1>
+
+    <body>
+        <form>
+            <table>
+                <tr>
+                    <td>Username: </td>
+                    <td><input type="text" id="username" placeholder="Phone or Email" required></td>
+                    <td style="color: red; font-family: Corbel; font-weight: bolder"><div id="usernamecheck"></div></td>
+                </tr>
+
+                <tr>
+                    <td>Password: </td>
+                    <td><input type="password" id="password" placeholder="Password" required></td>
+                <td style="color: red; font-family: Corbel; font-weight: bolder"><div id="passwordcheck"></div></td>
+                </tr>
+            </table>
+            <!--   -->
+            <input type="submit" value="Login" />
+            <a style="background-color: rgb(114, 249, 4); border-radius: 10px;" asp-area="" asp-controller="Home" asp-action="Resetpassword">Reset password</a><br>
+            
+            
+
+        </form>
+    </body>
+    
+    <script>
+        setInterval (function check(){
+                    var name = document.getElementById("username").value;
+                    var password = document.getElementById("password").value;
+                    if (name == "") {
+                        document.getElementById("usernamecheck").innerHTML="Input please"
+                    }
+                    else {
+                        document.getElementById("usernamecheck").innerHTML=""
+                    }
+
+                    if (password == "") {
+                        document.getElementById("passwordcheck").innerHTML="Input please"
+                    }
+                    else {
+                        document.getElementById("passwordcheck").innerHTML=""
+                    }
+        },2000);
+            
+        
+    </script>
+</html>
+
+

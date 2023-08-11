@@ -1,0 +1,41 @@
+.button_dropdown{
+    border: none;
+}
+
+.dropdown{
+    position: relative;
+    display: inline-block;
+
+}
+
+.content_dropdown{
+    display: none;
+    position: absolute;
+    background-color: white;
+    font-size: x-large;
+
+}
+
+.content_dropdown a {
+    color: black;
+    display: block;
+    text-decoration: none;
+    width: 100px;
+    font-size: 15px;
+}
+
+.content_dropdown a:hover {
+    background-color: lightgray;
+    text-decoration: none;
+    color: black;
+    font-family: 'Gloock';
+    font-size: 20px;
+}
+
+.dropdown:hover .content_dropdown {
+    display: block;
+}
+
+.dropdown:hover .button_dropdown {
+    text-decoration: none;
+}
